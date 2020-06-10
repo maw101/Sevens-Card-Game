@@ -1,9 +1,11 @@
+// TODO: add file header
 package sevens.model.game;
 
 import sevens.model.carddeck.Card;
 import sevens.model.carddeck.Deck;
 import sevens.model.carddeck.Hand;
 
+// TODO: add class JavaDoc
 public class SevensGame {
 
     private int numberOfPlayers;
@@ -16,7 +18,8 @@ public class SevensGame {
     //  CLUB = 2
     //  HEART = 3
     //  SPADE = 4
-    
+
+    // TODO: add method JavaDoc
     private void performInitialDeal() {
         Card dealtCard;
         int currentPlayerIndex = 0;

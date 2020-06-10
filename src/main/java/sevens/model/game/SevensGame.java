@@ -20,6 +20,18 @@ public class SevensGame {
     //  SPADE = 4
 
     // TODO: add method JavaDoc
+    public SevensGame() {
+        // setup game with default number of players (4)
+        this(4);
+    }
+
+    // TODO: add method JavaDoc
+    public SevensGame(int numberOfPlayers) {
+        this.numberOfPlayers = numberOfPlayers;
+        setupNewGame();
+    }
+
+    // TODO: add method JavaDoc
     public void setupNewGame() {
         playedCards = new PlacedSuit[4];
 

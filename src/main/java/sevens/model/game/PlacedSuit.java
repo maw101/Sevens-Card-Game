@@ -38,4 +38,27 @@ public class PlacedSuit {
         this.suit = suit;
     }
 
+    public boolean canCardBePlaced(Card cardToPlay) {
+        // get cards rank
+        int cardsRank = cardToPlay.getRank();
+
+        // if at least one card placed (including the 7)
+        if ((lowestCard != null) && (highestCard != null)) {
+            // if >7 then valid to play if card value is 1 more than high value
+            if ((cardsRank > 7) && (cardsRank == highestCard.getRank() + 1)) {
+                return true;
+
+            // if <7 then valid to play if card value is one less than low value
+            } else if ((cardsRank < 7) && (cardsRank == lowestCard.getRank() - 1)) {
+                return true;
+            }
+        
+        // if 7 then valid to play if not already there
+        } else if (cardsRank == 7) {
+            return true;
+        }
+
+        return false;
+    }
+
 }

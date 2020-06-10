@@ -9,7 +9,6 @@ import sevens.model.carddeck.Hand;
 public class SevensGame {
 
     private int numberOfPlayers;
-    private Deck deck;
     private Hand[] hands;
     private PlacedSuit[] playedCards; // Index 0=DIAMONDS; 1=CLUBS; 2=HEARTS; 3=SPADES
 
@@ -58,7 +57,7 @@ public class SevensGame {
         int currentPlayerIndex = 0;
 
         // setup new deck and new hand states
-        deck = new Deck(false); // standard deck without jokers
+        Deck deck = new Deck(false); // standard deck without jokers
         hands = new Hand[numberOfPlayers];
 
         // instantiate each hand

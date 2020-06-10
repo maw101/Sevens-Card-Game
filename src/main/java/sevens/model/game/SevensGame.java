@@ -78,15 +78,34 @@ public class SevensGame {
         }
     }
 
+    // TODO: add method JavaDoc
     public int getNumberOfPlayers() {
         return numberOfPlayers;
     }
 
+    // TODO: add method JavaDoc
     public Hand[] getHands() {
         return hands;
     }
 
+    // TODO: add method JavaDoc
     public PlacedSuit[] getPlayedCards() {
         return playedCards;
     }
+
+    // TODO: add method JavaDoc
+    public Hand getPlayersHand(int playerNumber) {
+        int playerIndex = playerNumber - 1;
+        checkIsValidPlayerIndex(playerIndex); // determine if the player number is valid
+        return hands[playerIndex];
+    }
+
+    // TODO: add method JavaDoc
+    public void removeCardFromPlayersHand(int playerNumber, Card cardToRemove) {
+        int playerIndex = playerNumber - 1;
+        checkIsValidPlayerIndex(playerIndex);
+
+        hands[playerIndex].removeCard(cardToRemove);
+    }
+
 }

@@ -20,6 +20,19 @@ public class SevensGame {
     //  SPADE = 4
 
     // TODO: add method JavaDoc
+    public void setupNewGame() {
+        playedCards = new PlacedSuit[4];
+
+        // instantiate each placed suit
+        for (int i = 0; i < 4; i++) {
+            playedCards[i] = new PlacedSuit();
+        }
+
+        // deal cards
+        performInitialDeal();
+    }
+
+    // TODO: add method JavaDoc
     private void performInitialDeal() {
         Card dealtCard;
         int currentPlayerIndex = 0;

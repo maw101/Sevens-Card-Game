@@ -26,6 +26,12 @@ public class PlacedSuit {
         return this.suit;
     }
 
+    public String getSuitName() {
+        // create a dummy card
+        Card dummyCard = new Card(this.suit, 2); // random rank
+        return dummyCard.getSuitString();
+    }
+
     public void setLowestCard(Card lowestCard) {
         this.lowestCard = lowestCard;
     }
@@ -52,7 +58,7 @@ public class PlacedSuit {
             } else if ((cardsRank < 7) && (cardsRank == lowestCard.getRank() - 1)) {
                 return true;
             }
-        
+
         // if 7 then valid to play if not already there
         } else if (cardsRank == 7) {
             return true;

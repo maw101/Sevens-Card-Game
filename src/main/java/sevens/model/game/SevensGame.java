@@ -79,4 +79,15 @@ public class SevensGame {
         }
     }
 
+    public int getNumberOfPlayers() {
+        return numberOfPlayers;
+    }
+
+    public Hand[] getHands() {
+        return hands;
+    }
+
+    public PlacedSuit[] getPlayedCards() {
+        return playedCards;
+    }
 }

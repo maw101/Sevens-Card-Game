@@ -32,6 +32,14 @@ public class SevensGame {
     }
 
     // TODO: add method JavaDoc
+    private void checkIsValidPlayerIndex(int playerIndex)
+        throws IllegalArgumentException {
+        if ((playerIndex < 0) || (playerIndex >= numberOfPlayers)) {
+            throw new IllegalArgumentException("Invalid Player Number");
+        }
+    }
+
+    // TODO: add method JavaDoc
     public void setupNewGame() {
         playedCards = new PlacedSuit[4];
 

@@ -11,6 +11,7 @@ public class SevensGame {
     private int numberOfPlayers;
     private Hand[] hands;
     private PlacedSuit[] playedCards; // Index 0=DIAMONDS; 1=CLUBS; 2=HEARTS; 3=SPADES
+    private int currentPlayerNumber;
 
     // Card Constants:
     //  DIAMOND = 1
@@ -27,6 +28,7 @@ public class SevensGame {
     // TODO: add method JavaDoc
     public SevensGame(int numberOfPlayers) {
         this.numberOfPlayers = numberOfPlayers;
+        this.currentPlayerNumber = 1;
         setupNewGame();
     }
 
@@ -91,6 +93,16 @@ public class SevensGame {
     // TODO: add method JavaDoc
     public PlacedSuit[] getPlayedCards() {
         return playedCards;
+    }
+
+    // TODO: add method JavaDoc
+    public int getCurrentPlayerNumber() {
+        return currentPlayerNumber;
+    }
+
+    // TODO: add method JavaDoc
+    public void nextPlayer() {
+        this.currentPlayerNumber++;
     }
 
     // TODO: add method JavaDoc

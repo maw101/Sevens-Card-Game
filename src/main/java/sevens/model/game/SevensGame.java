@@ -5,6 +5,8 @@ import sevens.model.carddeck.Card;
 import sevens.model.carddeck.Deck;
 import sevens.model.carddeck.Hand;
 
+import java.util.ArrayList;
+
 // TODO: add class JavaDoc
 public class SevensGame {
 
@@ -43,6 +45,28 @@ public class SevensGame {
         PlacedSuit placedSuit = playedCards[suitIndex];
 
         return placedSuit.canCardBePlaced(cardToPlay);
+    }
+
+    // TODO: add method JavaDoc
+    public ArrayList<Card> getAllValidMoves(int playerNumber) {
+        // create a new list to keep track of valid moves
+        ArrayList<Card> validMoves = new ArrayList<>();
+
+        // get player index and determine if the player number arg is valid
+        int playerIndex = playerNumber - 1;
+        checkIsValidPlayerIndex(playerIndex);
+        // get the players hand
+        Hand playersHand = hands[playerIndex];
+
+        // iterate over each card in the players hand
+        for (Card move : playersHand.getHand()) {
+            // determine if can be played, if so add to our list of valid moves
+            if (isValidMove(move)) {
+                validMoves.add(move);
+            }
+        }
+
+        return validMoves;
     }
 
     // TODO: add method JavaDoc

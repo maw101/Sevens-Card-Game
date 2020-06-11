@@ -160,7 +160,44 @@ public class SevensGame {
     }
 
     // TODO: add method JavaDoc
-    public void removeCardFromPlayersHand(int playerNumber, Card cardToRemove) {
+    public void makeMove(Card cardToPlay) {
+        // remove card from players hand
+        removeCardFromPlayersHand(currentPlayerNumber, cardToPlay);
+        // play the valid move
+        placeCard(cardToPlay);
+    }
+
+    // TODO: add method JavaDoc
+    private void placeCard(Card cardToPlay) {
+        // assumes is valid move
+
+        // get cards suit and rank
+        int cardsSuit = cardToPlay.getSuit();
+        int cardsRank = cardToPlay.getRank();
+
+        // get index of cards suit
+        int suitIndex = cardsSuit - 1;
+
+        // lookup the suit in the playedCards array
+        PlacedSuit placedSuit = playedCards[suitIndex];
+
+        // if card to play is a seven update both highest and lowest
+        if (cardsRank == 7) {
+            placedSuit.setLowestCard(cardToPlay);
+            placedSuit.setHighestCard(cardToPlay);
+
+        // if card to play is greater than a seven update highest
+        } else if (cardsRank > 7) {
+            placedSuit.setHighestCard(cardToPlay);
+
+        // if card to play is less than than a seven update lowest
+        } else { // cardsRank < 7
+            placedSuit.setLowestCard(cardToPlay);
+        }
+    }
+
+    // TODO: add method JavaDoc
+    private void removeCardFromPlayersHand(int playerNumber, Card cardToRemove) {
         int playerIndex = playerNumber - 1;
         checkIsValidPlayerIndex(playerIndex);
 

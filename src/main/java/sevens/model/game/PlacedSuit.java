@@ -82,7 +82,7 @@ public class PlacedSuit {
         String suitName = getSuitName();
 
         // if no cards placed
-        if ((lowestCard == null) && (highestCard == null)) {
+        if ((lowestCard == null) || (highestCard == null)) {
             return suitName + " - suit not yet played";
         }
 

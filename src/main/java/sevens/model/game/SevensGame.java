@@ -157,7 +157,10 @@ public class SevensGame {
      */
     public void nextPlayer() {
         this.currentPlayerNumber++;
-        // TODO: need to adapt to cycle back around when on the last player
+        // if we are on the last player, cycle back around to first player
+        if (this.currentPlayerNumber == (this.numberOfPlayers + 1)) {
+            this.currentPlayerNumber = 1;
+        }
     }
 
     /**

@@ -12,7 +12,7 @@ import java.util.concurrent.ThreadLocalRandom;
  */
 public class Deck {
 
-    private Card[] deck;
+    private final Card[] deck;
     private int numOfCardsDealt;
 
     /**

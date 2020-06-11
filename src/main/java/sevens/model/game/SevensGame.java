@@ -10,7 +10,7 @@ import java.util.ArrayList;
 // TODO: add class JavaDoc
 public class SevensGame {
 
-    private int numberOfPlayers;
+    private final int numberOfPlayers;
     private Hand[] hands;
     private PlacedSuit[] playedCards; // Index 0=DIAMONDS; 1=CLUBS; 2=HEARTS; 3=SPADES
     private int currentPlayerNumber;

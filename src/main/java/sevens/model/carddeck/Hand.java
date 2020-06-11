@@ -44,6 +44,15 @@ public class Hand {
     }
 
     /**
+     * Gets the hand.
+     *
+     * @return the hand
+     */
+    public List<Card> getHand() {
+        return hand;
+    }
+
+    /**
      * Remove card.
      *
      * @param card the card

@@ -33,6 +33,19 @@ public class SevensGame {
     }
 
     // TODO: add method JavaDoc
+    public boolean isValidMove(Card cardToPlay) {
+        // get cards suit
+        int cardsSuit = cardToPlay.getSuit();
+        // get index of current suit
+        int suitIndex = cardsSuit - 1;
+
+        // lookup the suit in the playedCards array
+        PlacedSuit placedSuit = playedCards[suitIndex];
+
+        return placedSuit.canCardBePlaced(cardToPlay);
+    }
+
+    // TODO: add method JavaDoc
     private void checkIsValidPlayerIndex(int playerIndex)
         throws IllegalArgumentException {
         if ((playerIndex < 0) || (playerIndex >= numberOfPlayers)) {

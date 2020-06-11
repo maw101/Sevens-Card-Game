@@ -66,16 +66,14 @@ public class PlacedSuit {
                 return true;
 
             // if <7 then valid to play if card value is one less than low value
-            } else if ((cardsRank < 7) && (cardsRank == lowestCard.getRank() - 1)) {
-                return true;
+            } else {
+                return (cardsRank < 7) && (cardsRank == lowestCard.getRank() - 1);
             }
 
         // if 7 then valid to play if not already there
-        } else if (cardsRank == 7) {
-            return true;
+        } else {
+            return cardsRank == 7;
         }
-
-        return false;
     }
 
     // TODO: add method JavaDoc

@@ -78,6 +78,16 @@ public class SevensGame {
     }
 
     // TODO: add method JavaDoc
+    public boolean hasPlayerWon(int playerNumber) {
+        // get player index and determine if the player number arg is valid
+        int playerIndex = playerNumber - 1;
+        checkIsValidPlayerIndex(playerIndex);
+
+        // determine if the player has no cards left to play
+        return hands[playerIndex].getCardCount() == 0;
+    }
+
+    // TODO: add method JavaDoc
     public void setupNewGame() {
         playedCards = new PlacedSuit[4];
 

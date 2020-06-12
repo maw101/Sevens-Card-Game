@@ -1,6 +1,8 @@
 package sevens.views.cli;
 
 import sevens.model.carddeck.Card;
+import sevens.model.carddeck.Hand;
+import sevens.model.game.PlacedSuit;
 import sevens.model.game.SevensGame;
 
 import java.util.Scanner;
@@ -43,6 +45,40 @@ public class SevensGameCLI {
             }
         } while ((numberOfComputerPlayers < 0) || (numberOfComputerPlayers > totalPlayers));
         return numberOfComputerPlayers;
+    }
+
+    private void displayHand(int playerNumber) {
+        Hand playersHand = model.getPlayersHand(playerNumber);
+        playersHand.sortBySuit();
+
+        System.out.println("Player #" + playerNumber + "'s Hand:");
+        for (Card card : playersHand.getHand()) {
+            System.out.println("\t" + card.toString());
+        }
+    }
+
+    private void displayGameState() {
+        int currentPlayerNumber = model.getCurrentPlayerNumber();
+        Hand[] playersHands = model.getHands();
+
+        System.out.println("### GAME STATE FOLLOWS ###");
+
+        // print current players number
+        System.out.println("Current Player is #" + currentPlayerNumber);
+
+        // print state of placed suits
+        System.out.println("State of Placed Cards:");
+        for (PlacedSuit suit : model.getPlayedCards()) {
+            System.out.println("\t" + suit.toString());
+        }
+
+        // print basic state of each players hand - not revealing specific cards
+        System.out.println("State of Players Hands:");
+        for (int handIndex = 0; handIndex < playersHands.length; handIndex++) {
+            System.out.println("\tPlayer " + (handIndex + 1) + " has " + playersHands[handIndex].getCardCount() + " card(s) left");
+        }
+
+        System.out.println("######");
     }
 
     private boolean hasPlayerWon() {

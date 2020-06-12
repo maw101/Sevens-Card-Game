@@ -1,5 +1,6 @@
 package sevens.views.cli;
 
+import sevens.model.carddeck.Card;
 import sevens.model.game.SevensGame;
 
 import java.util.Scanner;
@@ -44,6 +45,21 @@ public class SevensGameCLI {
         return numberOfComputerPlayers;
     }
 
-    
+    private boolean hasPlayerWon() {
+        int currentPlayerNumber = model.getCurrentPlayerNumber();
+        if (model.hasPlayerWon(currentPlayerNumber)) {
+            System.out.println("Player #" + currentPlayerNumber + " has WON!");
+            return true;
+        }
+        return false;
+    }
+
+    private boolean isValidMove(Card move) {
+        if (!model.isValidMove(move)) {
+            System.err.println("Invalid Move!");
+            return false;
+        }
+        return true;
+    }
 
 }

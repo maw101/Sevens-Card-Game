@@ -97,11 +97,18 @@ public class SevensGameCLI {
 
     private void displayHand(int playerNumber) {
         Hand playersHand = model.getPlayersHand(playerNumber);
+        boolean canPlay;
         playersHand.sortBySuit();
 
         System.out.println("Player #" + playerNumber + "'s Hand:");
         for (Card card : playersHand.getHand()) {
-            System.out.println("\t" + card.toString());
+            canPlay = model.isValidMove(card);
+            // highlight card as can be played
+            if (canPlay) {
+                System.out.println("* \t" + card.toString());
+            } else {
+                System.out.println("\t" + card.toString());
+            }
         }
     }
 

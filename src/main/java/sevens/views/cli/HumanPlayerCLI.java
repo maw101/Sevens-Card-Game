@@ -13,6 +13,43 @@ public class HumanPlayerCLI {
     private final static Scanner in = new Scanner(System.in);
 
     // TODO: method JavaDoc
+    public Card getMove(SevensGame model, int currentPlayerNumber) {
+        Hand hand = model.getPlayersHand(currentPlayerNumber);
+        Card card;
+        int suit;
+        int rank;
+        boolean wantsToSkipGo;
+        // get a card from the players hand
+        do {
+            // ask if they want to skip their go
+            wantsToSkipGo = wantsToSkipGo();
+            if (wantsToSkipGo) {
+                // check if they can make a move
+                if (!model.getAllValidMoves(currentPlayerNumber).isEmpty()) { // means player can move
+                    System.err.println("You have at least one valid move you can play");
+                } else { // can't go
+                    return null;
+                }
+            }
+            // get card input from user
+            do {
+                suit = getSuit();
+            } while (suit == -1);
+            do {
+                rank = getRank();
+            } while (rank == -1);
+
+            // tries to get the card from the hand - returns null if card not present
+            card = hand.getCard(suit, rank);
+            if (card == null) {
+                System.err.println("This card is not in your hand. Invalid Card.");
+            }
+        } while (card == null);
+        // return the card - calling method checks if we can play this card
+        return card;
+    }
+
+    // TODO: method JavaDoc
     private int getSuit() {
         String suitInput;
         System.out.println("Enter the Suit (DIAMONDS, CLUBS, HEARTS, SPADES):");

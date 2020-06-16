@@ -44,6 +44,25 @@ public class Hand {
     }
 
     /**
+     * Gets card.
+     *
+     * @param suit the suit of the card to retrieve
+     * @param rank the rank of the card to retrieve
+     * @return  the card if present in the users hand;
+     *          null otherwise.
+     */
+    public Card getCard(int suit, int rank) {
+        // check hand for card presence
+        for (Card c : hand) {
+            if ((c.getSuit() == suit) && (c.getRank() == rank)) {
+                return c;
+            }
+        }
+        // not present in hand
+        return null;
+    }
+
+    /**
      * Gets the hand.
      *
      * @return the hand

@@ -113,7 +113,7 @@ public class SevensGame {
 
         // instantiate each placed suit
         for (int i = 0; i < 4; i++) {
-            playedCards[i] = new PlacedSuit();
+            playedCards[i] = new PlacedSuit(i+1);
         }
 
         // deal cards

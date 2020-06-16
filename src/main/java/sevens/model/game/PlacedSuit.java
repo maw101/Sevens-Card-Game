@@ -31,10 +31,10 @@ public class PlacedSuit {
     /**
      * Instantiates a new Placed suit.
      */
-    public PlacedSuit() {
+    public PlacedSuit(int suit) {
         this.lowestCard = null;
         this.highestCard = null;
-        this.suit = 0;
+        this.suit = suit;
     }
 
     // ////////////////////// //

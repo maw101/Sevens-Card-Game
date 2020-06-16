@@ -18,19 +18,15 @@ public class HumanPlayerCLI {
         Card card;
         int suit;
         int rank;
-        boolean wantsToSkipGo;
+        boolean canMakeMove = !model.getAllValidMoves(currentPlayerNumber).isEmpty();
+
         // get a card from the players hand
         do {
-            // ask if they want to skip their go
-            wantsToSkipGo = wantsToSkipGo();
-            if (wantsToSkipGo) {
-                // check if they can make a move
-                if (!model.getAllValidMoves(currentPlayerNumber).isEmpty()) { // means player can move
-                    System.err.println("You have at least one valid move you can play");
-                } else { // can't go
-                    return null;
-                }
+            if (!canMakeMove) {
+                System.out.println("Player " + currentPlayerNumber + ", there were no moves you could make - your go was skipped.");
+                return null;
             }
+
             // get card input from user
             do {
                 suit = getSuit();
@@ -94,13 +90,6 @@ public class HumanPlayerCLI {
         }
         System.err.println("Invalid Rank Entered");
         return -1; // invalid
-    }
-
-    // TODO: method JavaDoc
-    private boolean wantsToSkipGo() {
-        System.out.println("Enter Y if you wish to skip your go:");
-        String input = in.nextLine().toUpperCase();
-        return ("Y").equals(input);
     }
 
 }

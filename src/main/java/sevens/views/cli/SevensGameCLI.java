@@ -10,14 +10,14 @@ import java.util.Scanner;
 public class SevensGameCLI {
 
     private final SevensGame model;
-    private final int numberOfComputerPlayers;
+    //private final int numberOfComputerPlayers;
     private final static Scanner in = new Scanner(System.in);
 
     public SevensGameCLI() {
         int totalPlayers = getNumberOfPlayersAsInput();
         // setup new game with that number of players
         model = new SevensGame(totalPlayers);
-        numberOfComputerPlayers = getNumberOfComputerPlayersAsInput();
+        //numberOfComputerPlayers = getNumberOfComputerPlayersAsInput();
     }
 
     private int getNumberOfPlayersAsInput() {
@@ -39,12 +39,60 @@ public class SevensGameCLI {
         int numberOfComputerPlayers;
         do {
             numberOfComputerPlayers = in.nextInt();
-            if ((numberOfComputerPlayers < 2) || (numberOfComputerPlayers > 52)) {
+            if ((numberOfComputerPlayers < 0) || (numberOfComputerPlayers > 52)) {
                 System.err.println("Number of computer players must be 0 or more, but less than or equal to the total number of players.");
                 System.out.println("Try again: ");
             }
         } while ((numberOfComputerPlayers < 0) || (numberOfComputerPlayers > totalPlayers));
         return numberOfComputerPlayers;
+    }
+
+    public void playGame() {
+        boolean gameWon = false;
+        boolean validMove;
+        Card cardToPlay;
+        int currentPlayerNumber;
+        HumanPlayerCLI currentPlayer;
+
+        // main game loop
+        while (!gameWon) {
+            currentPlayerNumber = model.getCurrentPlayerNumber();
+
+            System.out.println("\n");
+            // display game state
+            displayGameState();
+            System.out.println("\n");
+            // play for the current player
+            displayHand(currentPlayerNumber);
+            // get move
+            do { // loop until a valid move found
+                currentPlayer = new HumanPlayerCLI();
+                cardToPlay = currentPlayer.getMove(model, currentPlayerNumber);
+                // check player didn't skip their go
+                if (cardToPlay != null) {
+                    validMove = isValidMove(cardToPlay);
+                    if (!validMove) {
+                        System.err.println(cardToPlay + " cannot be played. Invalid Move.");
+                    }
+
+                // player skipped their go
+                } else {
+                    break;
+                }
+            } while (!validMove);
+            // if card played, make move, check for win
+            if (cardToPlay != null) {
+                // make the move
+                model.makeMove(cardToPlay);
+                // check if the player has won the game
+                gameWon = hasPlayerWon();
+            }
+            // move to next player if no win
+            if (!gameWon) {
+                model.nextPlayer();
+            }
+        }
+        System.out.println("Game Over");
     }
 
     private void displayHand(int playerNumber) {

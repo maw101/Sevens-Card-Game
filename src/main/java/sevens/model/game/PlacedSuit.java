@@ -145,11 +145,11 @@ public class PlacedSuit {
      */
     @Override
     public String toString() {
-        String suitName = getSuitName();
+        String suitName = String.format("%-13s", getSuitName()); // pad out and left align
 
         // if no cards placed
         if ((lowestCard == null) || (highestCard == null)) {
-            return suitName + " - suit not yet played";
+            return suitName + "Suit not yet played";
         }
 
         int lowVal = lowestCard.getRank();
@@ -157,11 +157,11 @@ public class PlacedSuit {
 
         // if 7 is the only placed card
         if ((lowVal == 7) && (highVal == 7)) {
-            return suitName + " - 7 Only";
+            return suitName + "7 Only";
 
         // if at least two cards placed (including the 7)
         } else {
-            return suitName + " - Low Card: " + lowestCard.getRankString() + " and High Card: " + highestCard.getRankString();
+            return suitName + lowestCard.getRankString() + " to " + highestCard.getRankString();
         }
     }
 

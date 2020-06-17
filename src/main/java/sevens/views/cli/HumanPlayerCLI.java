@@ -4,11 +4,13 @@ package sevens.views.cli;
 import sevens.model.carddeck.Card;
 import sevens.model.carddeck.Hand;
 import sevens.model.game.SevensGame;
+import sevens.model.players.Player;
 
 import java.util.Scanner;
 
 // TODO: class JavaDoc
-public class HumanPlayerCLI {
+public class HumanPlayerCLI
+        implements Player {
 
     private final static Scanner in = new Scanner(System.in);
 

@@ -93,6 +93,7 @@ public class SevensGameCLI {
 
             // if card played, make move, check for win
             if (cardToPlay != null) {
+                System.out.println("Playing: " + cardToPlay);
                 // make the move
                 model.makeMove(cardToPlay);
                 // check if the player has won the game

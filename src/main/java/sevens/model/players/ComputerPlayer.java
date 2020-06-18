@@ -25,12 +25,22 @@ public class ComputerPlayer
         // determine which is the best move to make as >1 valid moves
         } else {
             // maintain knowledge of current best score
-
+            int currentMaxScore = Integer.MIN_VALUE;
+            Card currentBestCard = null;
+            int score;
 
             // iterate over all valid moves determining a score for each
-            
+            for (Card card : validMoves) {
+                score = scoreCard(model, playersHand, card);
+
+                // determine if the card is the new best
+                if (score > currentMaxScore) {
+                    currentMaxScore = score;
+                    currentBestCard = card;
+                }
+            }
             // return card with the best score
-            return null;
+            return currentBestCard;
         }
     }
 

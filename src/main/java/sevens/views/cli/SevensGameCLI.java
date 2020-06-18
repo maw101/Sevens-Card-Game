@@ -60,6 +60,11 @@ public class SevensGameCLI {
         while (!gameWon) {
             currentPlayerNumber = model.getCurrentPlayerNumber();
 
+            System.out.println("\n");
+            // display game state
+            displayGameState();
+            System.out.println("\n");
+
             // determine our current player type
             if (currentPlayerNumber > (model.getNumberOfPlayers() - numberOfComputerPlayers)) { // is computer player
                 currentPlayer = new ComputerPlayer();
@@ -68,11 +73,6 @@ public class SevensGameCLI {
                 // display human player's hand
                 displayHand(currentPlayerNumber);
             }
-
-            System.out.println("\n");
-            // display game state
-            displayGameState();
-            System.out.println("\n");
 
             // get move
             do { // loop until a valid move found

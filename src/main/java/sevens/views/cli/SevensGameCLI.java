@@ -60,15 +60,22 @@ public class SevensGameCLI {
         while (!gameWon) {
             currentPlayerNumber = model.getCurrentPlayerNumber();
 
+            // determine our current player type
+            if (currentPlayerNumber > (model.getNumberOfPlayers() - numberOfComputerPlayers)) { // is computer player
+                currentPlayer = new ComputerPlayer();
+            } else {
+                currentPlayer = new HumanPlayerCLI();
+                // display human player's hand
+                displayHand(currentPlayerNumber);
+            }
+
             System.out.println("\n");
             // display game state
             displayGameState();
             System.out.println("\n");
-            // play for the current player
-            displayHand(currentPlayerNumber);
+
             // get move
             do { // loop until a valid move found
-                currentPlayer = new HumanPlayerCLI();
                 cardToPlay = currentPlayer.getMove(model, currentPlayerNumber);
                 // check player didn't skip their go
                 if (cardToPlay != null) {

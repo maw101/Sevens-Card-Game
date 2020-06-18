@@ -12,14 +12,14 @@ import java.util.Scanner;
 public class SevensGameCLI {
 
     private final SevensGame model;
-    //private final int numberOfComputerPlayers;
+    private final int numberOfComputerPlayers;
     private final static Scanner in = new Scanner(System.in);
 
     public SevensGameCLI() {
         int totalPlayers = getNumberOfPlayersAsInput();
         // setup new game with that number of players
         model = new SevensGame(totalPlayers);
-        //numberOfComputerPlayers = getNumberOfComputerPlayersAsInput();
+        numberOfComputerPlayers = getNumberOfComputerPlayersAsInput();
     }
 
     private int getNumberOfPlayersAsInput() {
@@ -104,7 +104,7 @@ public class SevensGameCLI {
                 model.nextPlayer();
             }
         }
-        
+
         System.out.println("Game Over");
     }
 

@@ -15,7 +15,29 @@ public class ComputerPlayer
     }
 
     private int scoreCard(SevensGame model, Hand playersHand, Card assessedCard) {
-        return 0;
+        // get the placed suit of the card from the model
+        PlacedSuit suitsState = model.getPlayedCards()[assessedCard.getSuit() - 1];
+        // get the rank of all cards of the placed suit from the players hand
+        Set<Integer> cardsOfSuitInHand = new TreeSet<>();
+        for (Card card : playersHand.getHand()) {
+            if (card.getSuit() == assessedCard.getSuit()) {
+                cardsOfSuitInHand.add(card.getRank());
+            }
+        }
+        // determine where to look
+
+        // if 7 then look above and below
+        if (assessedCard.getRank() == 7) {
+            return lookBelowSeven(suitsState, cardsOfSuitInHand) + lookAboveSeven(suitsState, cardsOfSuitInHand);
+
+        // if >7 then look above
+        } else if (assessedCard.getRank() > 7) {
+            return lookAboveSeven(suitsState, cardsOfSuitInHand);
+
+        // if <7 then look below
+        } else {
+            return lookBelowSeven(suitsState, cardsOfSuitInHand);
+        }
     }
 
     private int lookBelowSeven(PlacedSuit suitsState, Set<Integer> cardsOfSuitInHand) {

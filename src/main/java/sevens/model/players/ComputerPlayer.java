@@ -19,11 +19,41 @@ public class ComputerPlayer
     }
 
     private int lookBelowSeven(PlacedSuit suitsState, Set<Integer> cardsOfSuitInHand) {
-        return 0;
+        // get how many cards away the furthest card is
+        int minCardRank = Collections.min(cardsOfSuitInHand);
+        // count cards below 7 in hand
+        int cardsBelowSevenCount = (int) cardsOfSuitInHand.parallelStream().filter(rank -> rank < 7).count();
+
+        if (cardsBelowSevenCount == 0) {
+            return 0;
+        } else {
+            int lowestCard = (suitsState.getLowestCard() == null) ? 7 : suitsState.getLowestCard().getRank();
+            int score = lowestCard - minCardRank - 1;
+
+            score -= (cardsBelowSevenCount - 1);
+
+            score -= lowestCard - Card.ACE;
+            return score;
+        }
     }
 
     private int lookAboveSeven(PlacedSuit suitsState, Set<Integer> cardsOfSuitInHand) {
-    	return 0;
+        // get how many cards away the furthest card is
+        int maxCardRank = Collections.max(cardsOfSuitInHand);
+        // count cards above 7 in hand
+        int cardsAboveSevenCount = (int) cardsOfSuitInHand.parallelStream().filter(rank -> rank > 7).count();
+
+        if (cardsAboveSevenCount == 0) {
+            return 0;
+        } else {
+            int highestCard = (suitsState.getHighestCard() == null) ? 7 : suitsState.getHighestCard().getRank();
+            int score = maxCardRank - highestCard - 1;
+
+            score -= (cardsAboveSevenCount - 1);
+
+            score -= Card.KING - maxCardRank;
+            return score;
+        };
     }
 
 }

@@ -1,4 +1,6 @@
-// TODO: file header
+/*
+    HumanPlayerCLI.java 1.0.1 2020/06/18
+ */
 package sevens.views.cli;
 
 import sevens.model.carddeck.Card;
@@ -8,13 +10,28 @@ import sevens.model.players.Player;
 
 import java.util.Scanner;
 
-// TODO: class JavaDoc
+/**
+ * A CLI Human Player.
+ * <p>
+ * Gets a player move from the command line.
+ *
+ * @author Matthew Williams
+ * @version 1.0     Initial Implementation
+ * @version 1.0.1   Added JavaDoc and File Header Comment
+ */
 public class HumanPlayerCLI
         implements Player {
 
     private final static Scanner in = new Scanner(System.in);
 
-    // TODO: method JavaDoc
+    /**
+     * Gets a move from the player.
+     *
+     * @param model                 the sevens game model
+     * @param currentPlayerNumber   the current player number
+     * @return  card of choice to play;
+     *          null if no move can be made.
+     */
     public Card getMove(SevensGame model, int currentPlayerNumber) {
         Hand hand = model.getPlayersHand(currentPlayerNumber);
         Card card;
@@ -47,7 +64,11 @@ public class HumanPlayerCLI
         return card;
     }
 
-    // TODO: method JavaDoc
+    /**
+     * Gets the suit of the card to play from the player.
+     *
+     * @return the integer representation of the suit to play
+     */
     private int getSuit() {
         String suitInput;
         System.out.println("Enter the Suit (DIAMONDS, CLUBS, HEARTS, SPADES):");
@@ -66,7 +87,11 @@ public class HumanPlayerCLI
         return -1;
     }
 
-    // TODO: method JavaDoc
+    /**
+     * Gets the rank of the card to play from the player.
+     *
+     * @return the integer representation of the rank to play
+     */
     private int getRank() {
         String rankInput;
         System.out.println("Enter the Rank (ACE, 2-10, JACK, QUEEN, KING):");

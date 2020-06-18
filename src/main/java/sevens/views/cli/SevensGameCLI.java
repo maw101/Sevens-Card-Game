@@ -74,8 +74,9 @@ public class SevensGameCLI {
                 displayHand(currentPlayerNumber);
             }
 
-            // get move
-            do { // loop until a valid move found
+            // get move - loop until a valid move found
+            do {
+                // determine move to play
                 cardToPlay = currentPlayer.getMove(model, currentPlayerNumber);
                 // check player didn't skip their go
                 if (cardToPlay != null) {
@@ -89,6 +90,7 @@ public class SevensGameCLI {
                     break;
                 }
             } while (!validMove);
+
             // if card played, make move, check for win
             if (cardToPlay != null) {
                 // make the move
@@ -101,6 +103,7 @@ public class SevensGameCLI {
                 model.nextPlayer();
             }
         }
+        
         System.out.println("Game Over");
     }
 

@@ -11,7 +11,27 @@ public class ComputerPlayer
         implements Player {
 
     public Card getMove(SevensGame model, int currentPlayerNumber) {
-        return null;
+        Hand playersHand = model.getPlayersHand(currentPlayerNumber);
+        ArrayList<Card> validMoves = model.getAllValidMoves(currentPlayerNumber);
+
+        // check if there are any moves to play
+        if (validMoves.isEmpty()) {
+            return null; // skip go
+
+        // if only one move, play that
+        } else if (validMoves.size() == 1) {
+            return validMoves.get(0);
+
+        // determine which is the best move to make as >1 valid moves
+        } else {
+            // maintain knowledge of current best score
+
+
+            // iterate over all valid moves determining a score for each
+            
+            // return card with the best score
+            return null;
+        }
     }
 
     private int scoreCard(SevensGame model, Hand playersHand, Card assessedCard) {

@@ -4,6 +4,8 @@ import sevens.model.carddeck.Card;
 import sevens.model.carddeck.Hand;
 import sevens.model.game.PlacedSuit;
 import sevens.model.game.SevensGame;
+import sevens.model.players.ComputerPlayer;
+import sevens.model.players.Player;
 
 import java.util.Scanner;
 
@@ -52,7 +54,7 @@ public class SevensGameCLI {
         boolean validMove;
         Card cardToPlay;
         int currentPlayerNumber;
-        HumanPlayerCLI currentPlayer;
+        Player currentPlayer;
 
         // main game loop
         while (!gameWon) {

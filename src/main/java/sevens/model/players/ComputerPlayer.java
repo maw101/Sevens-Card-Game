@@ -18,4 +18,12 @@ public class ComputerPlayer
         return 0;
     }
 
+    private int lookBelowSeven(PlacedSuit suitsState, Set<Integer> cardsOfSuitInHand) {
+        return 0;
+    }
+
+    private int lookAboveSeven(PlacedSuit suitsState, Set<Integer> cardsOfSuitInHand) {
+    	return 0;
+    }
+
 }

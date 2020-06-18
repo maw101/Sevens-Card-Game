@@ -4,20 +4,22 @@ import sevens.model.carddeck.Card;
 import sevens.model.carddeck.Hand;
 import sevens.model.game.PlacedSuit;
 import sevens.model.game.SevensGame;
+import sevens.model.players.ComputerPlayer;
+import sevens.model.players.Player;
 
 import java.util.Scanner;
 
 public class SevensGameCLI {
 
     private final SevensGame model;
-    //private final int numberOfComputerPlayers;
+    private final int numberOfComputerPlayers;
     private final static Scanner in = new Scanner(System.in);
 
     public SevensGameCLI() {
         int totalPlayers = getNumberOfPlayersAsInput();
         // setup new game with that number of players
         model = new SevensGame(totalPlayers);
-        //numberOfComputerPlayers = getNumberOfComputerPlayersAsInput();
+        numberOfComputerPlayers = getNumberOfComputerPlayersAsInput();
     }
 
     private int getNumberOfPlayersAsInput() {
@@ -52,7 +54,7 @@ public class SevensGameCLI {
         boolean validMove;
         Card cardToPlay;
         int currentPlayerNumber;
-        HumanPlayerCLI currentPlayer;
+        Player currentPlayer;
 
         // main game loop
         while (!gameWon) {
@@ -62,11 +64,19 @@ public class SevensGameCLI {
             // display game state
             displayGameState();
             System.out.println("\n");
-            // play for the current player
-            displayHand(currentPlayerNumber);
-            // get move
-            do { // loop until a valid move found
+
+            // determine our current player type
+            if (currentPlayerNumber > (model.getNumberOfPlayers() - numberOfComputerPlayers)) { // is computer player
+                currentPlayer = new ComputerPlayer();
+            } else {
                 currentPlayer = new HumanPlayerCLI();
+                // display human player's hand
+                displayHand(currentPlayerNumber);
+            }
+
+            // get move - loop until a valid move found
+            do {
+                // determine move to play
                 cardToPlay = currentPlayer.getMove(model, currentPlayerNumber);
                 // check player didn't skip their go
                 if (cardToPlay != null) {
@@ -80,8 +90,10 @@ public class SevensGameCLI {
                     break;
                 }
             } while (!validMove);
+
             // if card played, make move, check for win
             if (cardToPlay != null) {
+                System.out.println("Playing: " + cardToPlay);
                 // make the move
                 model.makeMove(cardToPlay);
                 // check if the player has won the game
@@ -92,6 +104,7 @@ public class SevensGameCLI {
                 model.nextPlayer();
             }
         }
+
         System.out.println("Game Over");
     }
 

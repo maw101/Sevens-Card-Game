@@ -27,11 +27,17 @@ public class ComputerPlayer
         if (cardsBelowSevenCount == 0) {
             return 0;
         } else {
+            // update score to be lowest current placed rank - minCardRank - 1
             int lowestCard = (suitsState.getLowestCard() == null) ? 7 : suitsState.getLowestCard().getRank();
             int score = lowestCard - minCardRank - 1;
-
+            // subtract number of cards remaining to play below 7 minus 1 (-1 to disregard the
+            // assessed card)
+            //  if the player has more cards below the current lowest played then we don't depend
+            //  on other players as much - prefer to play the ones we depend on them making the
+            //  most moves to allow us to play
             score -= (cardsBelowSevenCount - 1);
-
+            // subtract the number of cards other players can place after we've reached our lowest
+            // card
             score -= lowestCard - Card.ACE;
             return score;
         }
@@ -46,14 +52,20 @@ public class ComputerPlayer
         if (cardsAboveSevenCount == 0) {
             return 0;
         } else {
+            // update score to be maxCardRank - highest current placed rank - 1
             int highestCard = (suitsState.getHighestCard() == null) ? 7 : suitsState.getHighestCard().getRank();
             int score = maxCardRank - highestCard - 1;
-
+            // subtract number of cards remaining to play above 7 minus 1 (-1 to disregard the
+            // assessed card)
+            //  if the player has more cards above the current highest played then we don't depend
+            //  on other players as much - prefer to play the ones we depend on them making the
+            //  most moves to allow us to play
             score -= (cardsAboveSevenCount - 1);
-
+            // subtract the number of cards other players can place after we've reached our highest
+            // card
             score -= Card.KING - maxCardRank;
             return score;
-        };
+        }
     }
 
 }

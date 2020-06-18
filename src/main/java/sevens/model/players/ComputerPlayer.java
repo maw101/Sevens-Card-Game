@@ -1,3 +1,6 @@
+/*
+    ComputerPlayer.java 1.0 2020/06/18
+ */
 package sevens.model.players;
 
 import sevens.model.carddeck.Card;
@@ -7,9 +10,26 @@ import sevens.model.game.SevensGame;
 
 import java.util.*;
 
+/**
+ * The Computer Player.
+ * <p>
+ * Scores each valid move in the current players hand and plays the card with
+ * the best score.
+ *
+ * @author Matthew Williams
+ * @version 1.0     Initial Implementation
+ */
 public class ComputerPlayer
         implements Player {
 
+    /**
+     * Gets the optimal move decided by the computer.
+     *
+     * @param model                 the sevens game model
+     * @param currentPlayerNumber   the current player number
+     * @return  card of choice to play;
+     *          null if no move can be made.
+     */
     public Card getMove(SevensGame model, int currentPlayerNumber) {
         Hand playersHand = model.getPlayersHand(currentPlayerNumber);
         ArrayList<Card> validMoves = model.getAllValidMoves(currentPlayerNumber);
@@ -44,6 +64,15 @@ public class ComputerPlayer
         }
     }
 
+    /**
+     * Scores a given card based on the state of the played cards.
+     *
+     * @param model         the sevens game model
+     * @param playersHand   the players hand
+     * @param assessedCard  the card to be scored/assessed
+     * @return  the score the computer assigns the assessed card -
+     *          the higher the better
+     */
     private int scoreCard(SevensGame model, Hand playersHand, Card assessedCard) {
         // get the placed suit of the card from the model
         PlacedSuit suitsState = model.getPlayedCards()[assessedCard.getSuit() - 1];
@@ -70,6 +99,14 @@ public class ComputerPlayer
         }
     }
 
+    /**
+     * Scores a card by looking below seven for the given suit.
+     *
+     * @param suitsState        the present state of the cards suit
+     * @param cardsOfSuitInHand a set of cards belonging to the given suit in
+     *                          the players hand
+     * @return the score the computer assigns to the suit below seven
+     */
     private int lookBelowSeven(PlacedSuit suitsState, Set<Integer> cardsOfSuitInHand) {
         // get how many cards away the furthest card is
         int minCardRank = Collections.min(cardsOfSuitInHand);
@@ -95,6 +132,14 @@ public class ComputerPlayer
         }
     }
 
+    /**
+     * Scores a card by looking above seven for the given suit.
+     *
+     * @param suitsState        the present state of the cards suit
+     * @param cardsOfSuitInHand a set of cards belonging to the given suit in
+     *                          the players hand
+     * @return the score the computer assigns to the suit above seven
+     */
     private int lookAboveSeven(PlacedSuit suitsState, Set<Integer> cardsOfSuitInHand) {
         // get how many cards away the furthest card is
         int maxCardRank = Collections.max(cardsOfSuitInHand);

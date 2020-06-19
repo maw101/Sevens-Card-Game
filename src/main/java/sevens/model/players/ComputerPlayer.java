@@ -87,7 +87,8 @@ public class ComputerPlayer
 
         // if 7 then look above and below
         if (assessedCard.getRank() == 7) {
-            return lookBelowSeven(suitsState, cardsOfSuitInHand) + lookAboveSeven(suitsState, cardsOfSuitInHand);
+            return  lookBelowSeven(suitsState, cardsOfSuitInHand) +
+                    lookAboveSeven(suitsState, cardsOfSuitInHand);
 
         // if >7 then look above
         } else if (assessedCard.getRank() > 7) {
@@ -114,10 +115,11 @@ public class ComputerPlayer
         int cardsBelowSevenCount = (int) cardsOfSuitInHand.parallelStream().filter(rank -> rank < 7).count();
 
         if (cardsBelowSevenCount == 0) {
-            return 0;
+            return -6; // we have no cards below 7, so all 6 belong to other people
         } else {
             // update score to be lowest current placed rank - minCardRank - 1
-            int lowestCard = (suitsState.getLowestCard() == null) ? 7 : suitsState.getLowestCard().getRank();
+            int lowestCard = (suitsState.getLowestCard() == null) ?
+                    7 : suitsState.getLowestCard().getRank();
             int score = lowestCard - minCardRank - 1;
             // subtract number of cards remaining to play below 7 minus 1 (-1 to disregard the
             // assessed card)
@@ -127,7 +129,7 @@ public class ComputerPlayer
             score -= (cardsBelowSevenCount - 1);
             // subtract the number of cards other players can place after we've reached our lowest
             // card
-            score -= lowestCard - Card.ACE;
+            score -= minCardRank - Card.ACE;
             return score;
         }
     }
@@ -147,10 +149,11 @@ public class ComputerPlayer
         int cardsAboveSevenCount = (int) cardsOfSuitInHand.parallelStream().filter(rank -> rank > 7).count();
 
         if (cardsAboveSevenCount == 0) {
-            return 0;
+            return -6; // we have no cards above 7, so all 6 belong to other people
         } else {
             // update score to be maxCardRank - highest current placed rank - 1
-            int highestCard = (suitsState.getHighestCard() == null) ? 7 : suitsState.getHighestCard().getRank();
+            int highestCard = (suitsState.getHighestCard() == null) ?
+                    7 : suitsState.getHighestCard().getRank();
             int score = maxCardRank - highestCard - 1;
             // subtract number of cards remaining to play above 7 minus 1 (-1 to disregard the
             // assessed card)

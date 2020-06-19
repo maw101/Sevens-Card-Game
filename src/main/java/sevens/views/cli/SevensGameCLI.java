@@ -60,10 +60,8 @@ public class SevensGameCLI {
         while (!gameWon) {
             currentPlayerNumber = model.getCurrentPlayerNumber();
 
-            System.out.println("\n");
             // display game state
             displayGameState();
-            System.out.println("\n");
 
             // determine our current player type
             if (currentPlayerNumber > (model.getNumberOfPlayers() - numberOfComputerPlayers)) { // is computer player
@@ -105,6 +103,8 @@ public class SevensGameCLI {
             }
         }
 
+        // display game state
+        displayGameState();
         System.out.println("Game Over");
     }
 
@@ -129,7 +129,7 @@ public class SevensGameCLI {
         int currentPlayerNumber = model.getCurrentPlayerNumber();
         Hand[] playersHands = model.getHands();
 
-        System.out.println("### GAME STATE FOLLOWS ###");
+        System.out.println("\n### GAME STATE FOLLOWS ###");
 
         // print current players number
         System.out.println("Current Player is #" + currentPlayerNumber);
@@ -146,7 +146,7 @@ public class SevensGameCLI {
             System.out.println("\tPlayer " + (handIndex + 1) + " has " + playersHands[handIndex].getCardCount() + " card(s) left");
         }
 
-        System.out.println("######");
+        System.out.println("######\n");
     }
 
     private boolean hasPlayerWon() {

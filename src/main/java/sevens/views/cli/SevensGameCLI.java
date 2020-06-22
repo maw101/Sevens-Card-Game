@@ -1,3 +1,6 @@
+/*
+    SevensGameCLI.java 1.0.1 2020/06/22
+ */
 package sevens.views.cli;
 
 import sevens.model.carddeck.Card;
@@ -9,12 +12,24 @@ import sevens.model.players.Player;
 
 import java.util.Scanner;
 
+/**
+ * A CLI Interface for the Sevens Card Game.
+ * <p>
+ * Facilitates playing of the game through a Command Line Interface.
+ *
+ * @author Matthew Williams
+ * @version 1.0     Initial Implementation
+ * @version 1.0.1 Added JavaDoc and File Header Comment
+ */
 public class SevensGameCLI {
 
     private final SevensGame model;
     private final int numberOfComputerPlayers;
     private final static Scanner in = new Scanner(System.in);
 
+    /**
+     * Instantiates a new Sevens Game CLI.
+     */
     public SevensGameCLI() {
         int totalPlayers = getNumberOfPlayersAsInput();
         // setup new game with that number of players
@@ -22,33 +37,9 @@ public class SevensGameCLI {
         numberOfComputerPlayers = getNumberOfComputerPlayersAsInput();
     }
 
-    private int getNumberOfPlayersAsInput() {
-        System.out.println("Enter the Number of Players: ");
-        int numberOfPlayers;
-        do {
-            numberOfPlayers = in.nextInt();
-            if ((numberOfPlayers < 2) || (numberOfPlayers > 52)) {
-                System.err.println("Number of players must be greater than 1 and less than 53");
-                System.out.println("Try again: ");
-            }
-        } while ((numberOfPlayers < 2) || (numberOfPlayers > 52));
-        return numberOfPlayers;
-    }
-
-    private int getNumberOfComputerPlayersAsInput() {
-        int totalPlayers = this.model.getNumberOfPlayers();
-        System.out.println("Enter the Number of Players you wish to be Computer Players: ");
-        int numberOfComputerPlayers;
-        do {
-            numberOfComputerPlayers = in.nextInt();
-            if ((numberOfComputerPlayers < 0) || (numberOfComputerPlayers > 52)) {
-                System.err.println("Number of computer players must be 0 or more, but less than or equal to the total number of players.");
-                System.out.println("Try again: ");
-            }
-        } while ((numberOfComputerPlayers < 0) || (numberOfComputerPlayers > totalPlayers));
-        return numberOfComputerPlayers;
-    }
-
+    /**
+     * Play game.
+     */
     public void playGame() {
         boolean gameWon = false;
         boolean validMove;
@@ -60,10 +51,8 @@ public class SevensGameCLI {
         while (!gameWon) {
             currentPlayerNumber = model.getCurrentPlayerNumber();
 
-            System.out.println("\n");
             // display game state
             displayGameState();
-            System.out.println("\n");
 
             // determine our current player type
             if (currentPlayerNumber > (model.getNumberOfPlayers() - numberOfComputerPlayers)) { // is computer player
@@ -105,9 +94,53 @@ public class SevensGameCLI {
             }
         }
 
+        // display game state
+        displayGameState();
         System.out.println("Game Over");
     }
 
+    /**
+     * Gets the number of players as input from the user.
+     *
+     * @return the total number of players
+     */
+    private int getNumberOfPlayersAsInput() {
+        System.out.println("Enter the Number of Players: ");
+        int numberOfPlayers;
+        do {
+            numberOfPlayers = in.nextInt();
+            if ((numberOfPlayers < 2) || (numberOfPlayers > 52)) {
+                System.err.println("Number of players must be greater than 1 and less than 53");
+                System.out.println("Try again: ");
+            }
+        } while ((numberOfPlayers < 2) || (numberOfPlayers > 52));
+        return numberOfPlayers;
+    }
+
+    /**
+     * Gets the number of computer players as input from the user.
+     *
+     * @return the number of players of the computer type
+     */
+    private int getNumberOfComputerPlayersAsInput() {
+        int totalPlayers = this.model.getNumberOfPlayers();
+        System.out.println("Enter the Number of Players you wish to be Computer Players: ");
+        int numberOfComputerPlayers;
+        do {
+            numberOfComputerPlayers = in.nextInt();
+            if ((numberOfComputerPlayers < 0) || (numberOfComputerPlayers > 52)) {
+                System.err.println("Number of computer players must be 0 or more, but less than or equal to the total number of players.");
+                System.out.println("Try again: ");
+            }
+        } while ((numberOfComputerPlayers < 0) || (numberOfComputerPlayers > totalPlayers));
+        return numberOfComputerPlayers;
+    }
+
+    /**
+     * Displays the cards in the given players hand.
+     *
+     * @param playerNumber the number of the given player
+     */
     private void displayHand(int playerNumber) {
         Hand playersHand = model.getPlayersHand(playerNumber);
         boolean canPlay;
@@ -125,11 +158,17 @@ public class SevensGameCLI {
         }
     }
 
+    /**
+     * Displays an overview of the games state.
+     * <p>
+     * Gives the placed cards for each suit along with card counts for each of
+     * the players.
+     */
     private void displayGameState() {
         int currentPlayerNumber = model.getCurrentPlayerNumber();
         Hand[] playersHands = model.getHands();
 
-        System.out.println("### GAME STATE FOLLOWS ###");
+        System.out.println("\n### GAME STATE FOLLOWS ###");
 
         // print current players number
         System.out.println("Current Player is #" + currentPlayerNumber);
@@ -146,9 +185,17 @@ public class SevensGameCLI {
             System.out.println("\tPlayer " + (handIndex + 1) + " has " + playersHands[handIndex].getCardCount() + " card(s) left");
         }
 
-        System.out.println("######");
+        System.out.println("######\n");
     }
 
+    /**
+     * Determines if the player has won the game.
+     * <p>
+     * Prints a message to the CLI if the player wins.
+     *
+     * @return  true if the player has won;
+     *          false otherwise.
+     */
     private boolean hasPlayerWon() {
         int currentPlayerNumber = model.getCurrentPlayerNumber();
         if (model.hasPlayerWon(currentPlayerNumber)) {
@@ -158,6 +205,14 @@ public class SevensGameCLI {
         return false;
     }
 
+    /**
+     * Determines if a given card would be a valid move.
+     * <p>
+     * Prints a message to the CLI if the move is invalid.
+     *
+     * @return  true if the move is valid;
+     *          false otherwise.
+     */
     private boolean isValidMove(Card move) {
         if (!model.isValidMove(move)) {
             System.err.println("Invalid Move!");
